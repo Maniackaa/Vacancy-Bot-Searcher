@@ -31,10 +31,15 @@ def custom_kb(width: int, buttons_dict: dict, back='', group='', menus='') -> In
     return kb_builder.as_markup()
 
 
-PREFIX = '.Text'
+kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+b1 = InlineKeyboardButton(text='Whatsapp', callback_data='write_whatsapp')
+b2 = InlineKeyboardButton(text='Viber', callback_data='write_viber')
+b3 = InlineKeyboardButton(text='Telegram', callback_data='write_telegram')
+write_kb = kb_builder.row(b1, b2, b3).as_markup()
+
 kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
 b1 = InlineKeyboardButton(text='Подписаться на profdepo', url='https://t.me/profdepo_ru')
-write_kb = kb_builder.row(b1).as_markup()
+write_bn = kb_builder.row(b1).as_markup()
 
 
 yes_no_kb_btn = {

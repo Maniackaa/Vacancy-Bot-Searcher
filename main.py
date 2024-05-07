@@ -15,7 +15,7 @@ from aiogram_dialog.api.exceptions import UnknownIntent
 from config.bot_settings import logger, settings
 from handlers import user_handlers
 from handlers.user_handlers import on_unknown_intent
-from keyboards.keyboards import write_kb
+from keyboards.keyboards import write_bn
 from services.api_func import get_result
 from services.db_func import get_active_searches
 
@@ -61,7 +61,7 @@ async def send_result(bot: Bot):
                 text += f'{search_res}\n\n'
             if search_results:
                 text += '\n\nКстати, подписчики @profdepo_ru получают вакансии раньше всех. Подпишись!'
-                await bot.send_message(chat_id=search.user.tg_id, text=text, reply_markup=write_kb)
+                await bot.send_message(chat_id=search.user.tg_id, text=text, reply_markup=write_bn)
         except Exception as err:
             logger.error(err)
 
