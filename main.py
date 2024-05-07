@@ -15,6 +15,7 @@ from aiogram_dialog.api.exceptions import UnknownIntent
 from config.bot_settings import logger, settings
 from handlers import user_handlers
 from handlers.user_handlers import on_unknown_intent
+from keyboards.keyboards import write_kb
 from services.api_func import get_result
 from services.db_func import get_active_searches
 
@@ -59,19 +60,20 @@ async def send_result(bot: Bot):
             for search_res in search_results:
                 text += f'{search_res}\n\n'
             if search_results:
-                await bot.send_message(chat_id=search.user.tg_id, text=text)
+                text += '\n\nКстати, подписчики @profdepo_ru получают вакансии раньше всех. Подпишись!'
+                await bot.send_message(chat_id=search.user.tg_id, text=text, reply_markup=write_kb)
         except Exception as err:
             logger.error(err)
 
 
 def set_scheduled_jobs(scheduler, bot, *args, **kwargs):
-    # scheduler.add_job(send_result, "interval", seconds=60, args=(bot,))
-    scheduler.add_job(
-        send_result,
-        "cron",
-        hour="19",
-        minute="57",
-        args=(bot,))
+    scheduler.add_job(send_result, "interval", minutes=10, args=(bot,))
+    # scheduler.add_job(
+    #     send_result,
+    #     "cron",
+    #     hour="19",
+    #     minute="57",
+    #     args=(bot,))
 
 
 async def main():
