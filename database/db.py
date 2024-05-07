@@ -13,7 +13,7 @@ from sqlalchemy_utils import database_exists, create_database
 # db_url = f"postgresql+psycopg2://{conf.db.db_user}:{conf.db.db_password}@{conf.db.db_host}:{conf.db.db_port}/{conf.db.database}"
 from config.bot_settings import BASE_DIR, logger
 
-db_path = BASE_DIR / 'base.sqlite'
+db_path = BASE_DIR / 'db.sqlite3'
 db_url = f"sqlite:///{db_path}"
 engine = create_engine(db_url, echo=False)
 Session = sessionmaker(bind=engine)
