@@ -1,0 +1,15 @@
+[Unit]
+Description=Vacancy-Bot-Searcher
+After=network.target
+
+[Service]
+EnvironmentFile=
+ExecStart=/home/tg-admin/Vacancy-Bot-Searcher/venv/bin/python3 main.py
+ExecReload=/home/tg-admin/Vacancy-Bot-Searcher/venv/bin/python3 main.py
+WorkingDirectory=/home/tg-admin/Vacancy-Bot-Searcher
+KillMode=process
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
